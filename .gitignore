@@ -3,5 +3,5 @@ content/uploads
 Gemfile.lock
 local-config.php
 config/config.rb
-config/production.rb
-config/staging.rb
+config/deploy/production.rb
+config/deploy/staging.rb
