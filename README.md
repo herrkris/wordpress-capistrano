@@ -1,28 +1,33 @@
 # Wordpress Capistrano Deploy
 
-Einfaches Deployment für Wordpress Seiten.
+Easy deployment for Wordpress sites.
 
-## Voraussetzungen
-1. Production- und Staging-Server müssen über ssh zugänglich sein
-2. git muss unter allen Umgebungen installiert sein
-2. wp-cli muss sowohl lokal als auch remote installiert sein (http://wp-cli.org/#install)
+## Requirements
+1. Your production and staging servers have to be accessible via ssh
+2. Git has to be installed in all environments
+2. The same applies to wp-cli (http://wp-cli.org/#install)
 
 ## Setup
-Damit das Capistrano deployment läuft, müssen ein paar Vorbereitungen getroffen werden.
-Sowohl lokal, als auch auf den Staging oder Production Servern:
+For the capistrano deployment to run properly you have make some  preparations to your local environment:
 
-### Lokal
-1. Capistrano muss installiert sein: `bundler install`
-2. local-config.SAMPLE.php muss in local-config.php umbenannt werden und es müssen die Zugangsdaten für die lokale Datenbank eingetragen sein
-3. Die config.SAMPLE.rb im Ordner config muss in config.rb umbenannt werden und für jede Stage müssen die entsprechend Datenbankzugangsdaten eingetragen werden
-4. Im Ordner config/deploy müssen für jede benutzte Stage die entsprechende Datei umbenannt und angepasst werden
+1. capistrano must be installed: `bundler install`
+2. Rename local-config.SAMPLE.php to local-config.php and replace the placeholders with your database credentials
+3. Rename config.SAMPLE.rb to config.rb (located in the config directory). For every stage you have to edit your database credentials. Pay attention to the :local_url variable!
+4. Rename the files in config/deploy accordingly and edit the variables so they match the environment
 
 ## Tasks
-Mit `bundle exec cap staging deploy` lässt sich auf den Staging-Server deployen, entsprechend mit `bundle exec cap staging deploy` auf den Production-Server.
-Möchte man die Datenbank vom Staging-Server in seine lokale Umgebung spiegeln reicht ein: `bundle exec cap wordpress:db:pull`. Um die lokale Datenbank
-auf den Staging-Server zu spielen `bundle exec cap staging wordpress:db:push`.
+### `bundle exec cap staging deploy`
+Deploy your current code base to the staging server
+
+### `bundle exec cap staging wordpress:db:pull`
+Copy the staging database to your local database.
+
+### `bundle exec cap staging wordpress:db:push`
+Copy the local database to the staging server
+
+The tasks `wordpress:db:pull` and `wordpress:db:push` will find and the remote url and replaces it with your local url. So keeping your database in sync is a no brainer.
 
 ## Todo
 * Wordpress Multisite Deployment
-* Sync von Upload-Ordnern
-* Möglichkeit Wordpress als Submodule einzubinden
+* Keeping upload folders in sync
+* adding Wordpress as a Submodule
