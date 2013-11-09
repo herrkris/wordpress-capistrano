@@ -1,0 +1,57 @@
+namespace :wordpress do
+  desc "Setup symlinks for a WordPress project"
+  task :create_symlinks do
+    on roles(:web) do
+      execute "ln -nfs #{shared_path}/uploads #{release_path}/content/uploads"
+    end
+  end
+
+  desc "Sets the database credentials (and other settings) in wp-config.php"
+  task :make_config do
+    on roles(:web) do
+      {:'%%DB_NAME%%' => fetch(:wpdb)[fetch(:stage)][:name], :'%%DB_USER%%' => fetch(:wpdb)[fetch(:stage)][:user], :'%%DB_PASSWORD%%' => fetch(:wpdb)[fetch(:stage)][:password], :'%%DB_HOST%%' => fetch(:wpdb)[fetch(:stage)][:host]}.each do |k,v|
+        execute "sed -i 's/#{k}/#{v}/' #{release_path}/wp-config.php"
+      end
+    end
+  end
+
+  namespace :db do
+    desc "Pull the remote database"
+    task :pull do
+      on roles(:web) do
+        within release_path do
+          with path: "#{fetch(:path)}:$PATH" do
+            execute :wp, "migrate to #{fetch(:tmp_dir)} #{fetch(:local_url)} #{fetch(:tmp_dir)}/database.sql --path=wordpress"
+            download! "#{fetch(:tmp_dir)}/database.sql", "database.sql"
+          end
+        end
+
+        run_locally do
+          execute "mysql -u #{fetch(:wpdb)[:local][:user]} -p#{fetch(:wpdb)[:local][:password]} -h #{fetch(:wpdb)[:local][:host]} #{fetch(:wpdb)[:local][:name]} < database.sql"
+          execute :rm, "database.sql"
+        end
+      end
+    end
+
+    desc "Push the local database"
+    task :push do
+      on roles(:web) do
+        run_locally do
+          execute :wp, "migrate to tmp #{fetch(:url)} database.sql --path=wordpress"
+        end
+
+        upload! "database.sql", "#{fetch(:tmp_dir)}/database.sql"
+
+        run_locally do
+          execute :rm, "database.sql"
+        end
+
+        within release_path do
+          with path: "#{fetch(:path)}:$PATH" do
+            execute :mysql, "-u #{fetch(:wpdb)[fetch(:stage)][:user]} -p\"#{fetch(:wpdb)[fetch(:stage)][:password]}\" -h #{fetch(:wpdb)[fetch(:stage)][:host]} #{fetch(:wpdb)[fetch(:stage)][:name]} < #{fetch(:tmp_dir)}/database.sql"
+          end
+        end
+      end
+    end
+  end
+end

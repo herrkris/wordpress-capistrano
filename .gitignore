@@ -1,0 +1,7 @@
+content/uploads
+.DS_Store
+Gemfile.lock
+local-config.php
+config/config.rb
+config/production.rb
+config/staging.rb
