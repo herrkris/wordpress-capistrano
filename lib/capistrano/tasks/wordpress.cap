@@ -39,6 +39,7 @@ namespace :wordpress do
 
       within submodule_path do
         execute :git, :pull
+        execute :git, :submodule, :update
       end
     end
   end
