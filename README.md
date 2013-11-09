@@ -1,6 +1,6 @@
-# Wordpress Capistrano Deploy
+# Wordpress Capistrano (3) Deploy
 
-Easy deployment for Wordpress sites.
+Easy deployment for Wordpress sites including your database.
 
 ## Requirements
 1. Your production and staging servers have to be accessible via ssh
