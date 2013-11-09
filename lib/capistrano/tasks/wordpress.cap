@@ -1,4 +1,5 @@
 namespace :wordpress do
+
   desc "Setup symlinks for a WordPress project"
   task :create_symlinks do
     on roles(:web) do
@@ -15,16 +16,40 @@ namespace :wordpress do
     end
   end
 
-  desc "Get Wordpress submodule"
-  task :archive_wordpress do
+  desc "Create Submodules cache"
+  task :create_submodules do
     on roles(:web) do
-      within deploy_path do
-        execute :mkdir, "_repo_tmp"
-        within "_repo_tmp" do
-          execute :git, :clone, '--recursive', repo_url, '.'
-          execute :git, :archive, fetch(:branch), '| tar -x -C', "#{release_path}/wordpress"
-          execute :rm, '-rf', '../_repo_tmp'
+      submodule_path = "#{deploy_path}/submodules"
+
+      if test " [ -f #{submodule_path}/index.php ] "
+        info t(:mirror_exists, at: submodule_path)
+      else
+        execute :mkdir, '-p', submodule_path
+        within submodule_path do
+          execute :git, :clone, '-b', fetch(:branch), '--recursive', repo_url, '.'
         end
+      end
+    end
+  end
+
+  desc "Update Submodules cache"
+  task update_submodules: :'wordpress:create_submodules' do
+    on roles(:web) do
+      submodule_path = "#{deploy_path}/submodules"
+
+      within submodule_path do
+        execute :git, :pull
+      end
+    end
+  end
+
+  desc "Create Release with submodule"
+  task create_release: :'wordpress:update_submodules' do
+    on roles(:web) do
+      submodule_path = "#{deploy_path}/submodules"
+      version = capture("cd #{submodule_path}/wordpress && git describe --abbrev=0 --tags")
+      within "#{submodule_path}/wordpress" do
+        execute :git, :archive, version, '| tar -x -C', "#{release_path}/wordpress"
       end
     end
   end

@@ -33,4 +33,4 @@ end
 
 after "deploy:symlink:shared", "wordpress:create_symlinks"
 after "deploy:symlink:shared", "wordpress:make_config"
-after "deploy:updated", "wordpress:archive_wordpress"
+after "deploy:updated", "wordpress:create_release"
