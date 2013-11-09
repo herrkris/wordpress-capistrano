@@ -15,6 +15,16 @@ namespace :wordpress do
     end
   end
 
+  desc "Get Wordpress submodule"
+  task :archive_wordpress do
+    on roles(:web) do
+      within "#{repo_path}/wordpress" do
+        version = capture("git describe --abbrev=0 --tags")
+        execute :git, :archive, version, '| tar -x -C', "#{release_path}/wordpress"
+      end
+    end
+  end
+
   namespace :db do
     desc "Pull the remote database"
     task :pull do
