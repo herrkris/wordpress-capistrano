@@ -16,3 +16,8 @@ Sowohl lokal, als auch auf den Staging oder Production Servern:
 2. local-config.SAMPLE.php muss in local-config.php umbenannt werden und es müssen die Zugangsdaten für die lokale Datenbank eingetragen sein
 3. Die config.SAMPLE.rb im Ordner config muss in config.rb umbenannt werden und für jede Stage müssen die entsprechend Datenbankzugangsdaten eingetragen werden
 4. Im Ordner config/deploy müssen für jede benutzte Stage die entsprechende Datei umbenannt und angepasst werden
+
+## Todo
+* Wordpress Multisite Deployment
+* Sync von Upload-Ordnern
+* Möglichkeit Wordpress als Submodule einzubinden
