@@ -18,9 +18,13 @@ namespace :wordpress do
   desc "Get Wordpress submodule"
   task :archive_wordpress do
     on roles(:web) do
-      within "#{repo_path}/wordpress" do
-        version = capture("git describe --abbrev=0 --tags")
-        execute :git, :archive, version, '| tar -x -C', "#{release_path}/wordpress"
+      within deploy_path do
+        execute :mkdir, "_repo_tmp"
+        within "_repo_tmp" do
+          execute :git, :clone, '--recursive', repo_url, '.'
+          execute :git, :archive, fetch(:branch), '| tar -x -C', "#{release_path}/wordpress"
+          execute :rm, '-rf', '../_repo_tmp'
+        end
       end
     end
   end
