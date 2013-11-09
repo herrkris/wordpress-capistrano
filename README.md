@@ -25,7 +25,7 @@ Copy the staging database to your local database.
 ### `bundle exec cap staging wordpress:db:push`
 Copy the local database to the staging server
 
-The tasks `wordpress:db:pull` and `wordpress:db:push` will find and the remote url and replaces it with your local url. So keeping your database in sync is a no brainer.
+The tasks `wordpress:db:pull` and `wordpress:db:push` will find the remote url and replaces it with your local url. So keeping your database in sync is a no brainer.
 
 ## Todo
 * Wordpress Multisite Deployment
