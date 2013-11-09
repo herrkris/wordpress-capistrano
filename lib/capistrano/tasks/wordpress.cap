@@ -23,6 +23,7 @@ namespace :wordpress do
           with path: "#{fetch(:path)}:$PATH" do
             execute :wp, "migrate to #{fetch(:tmp_dir)} #{fetch(:local_url)} #{fetch(:tmp_dir)}/database.sql --path=wordpress"
             download! "#{fetch(:tmp_dir)}/database.sql", "database.sql"
+            execute :rm, "#{fetch(:tmp_dir)}/database.sql"
           end
         end
 
@@ -49,6 +50,7 @@ namespace :wordpress do
         within release_path do
           with path: "#{fetch(:path)}:$PATH" do
             execute :mysql, "-u #{fetch(:wpdb)[fetch(:stage)][:user]} -p\"#{fetch(:wpdb)[fetch(:stage)][:password]}\" -h #{fetch(:wpdb)[fetch(:stage)][:host]} #{fetch(:wpdb)[fetch(:stage)][:name]} < #{fetch(:tmp_dir)}/database.sql"
+            execute :rm, "#{fetch(:tmp_dir)}/database.sql"
           end
         end
       end
