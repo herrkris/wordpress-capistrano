@@ -30,4 +30,4 @@ The tasks `wordpress:db:pull` and `wordpress:db:push` will find and the remote u
 ## Todo
 * Wordpress Multisite Deployment
 * Keeping upload folders in sync
-* adding Wordpress as a Submodule
+* adding Wordpress as a Submodule. I know it sucks having a copy of wordpress in the repository, but since Capistrano 3 no longer supports git submodules I'm fine wih this.
