@@ -30,3 +30,4 @@ The tasks `wordpress:db:pull` and `wordpress:db:push` will find the remote url a
 ## Todo
 * Wordpress Multisite Deployment
 * Keeping upload folders in sync
+* ~~Wordpress as a submodule~~ it's ugly, but it gets the job done ...
