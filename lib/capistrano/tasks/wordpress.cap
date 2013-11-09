@@ -3,10 +3,7 @@ namespace :wordpress do
   desc "Setup symlinks for a WordPress project"
   task :create_symlinks do
     on roles(:web) do
-      unless test " [ -f #{shared_path}/uploads ] "
-        execute :mkdir, "#{shared_path}/uploads"
-      end
-
+      execute :mkdir, "-p", "#{shared_path}/uploads"
       execute "ln -nfs #{shared_path}/uploads #{release_path}/content/uploads"
     end
   end
