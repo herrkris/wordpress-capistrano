@@ -4,7 +4,7 @@ Easy deployment for Wordpress sites.
 
 ## Requirements
 1. Your production and staging servers have to be accessible via ssh
-2. Git has to be installed in all environments
+2. Git has to be installed in every environment
 2. The same applies to wp-cli (http://wp-cli.org/#install)
 
 ## Setup
