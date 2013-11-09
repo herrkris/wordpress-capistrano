@@ -17,6 +17,11 @@ Sowohl lokal, als auch auf den Staging oder Production Servern:
 3. Die config.SAMPLE.rb im Ordner config muss in config.rb umbenannt werden und für jede Stage müssen die entsprechend Datenbankzugangsdaten eingetragen werden
 4. Im Ordner config/deploy müssen für jede benutzte Stage die entsprechende Datei umbenannt und angepasst werden
 
+## Tasks
+Mit `bundle exec cap staging deploy` lässt sich auf den Staging-Server deployen, entsprechend mit `bundle exec cap staging deploy` auf den Production-Server.
+Möchte man die Datenbank vom Staging-Server in seine lokale Umgebung spiegeln reicht ein: `bundle exec cap wordpress:db:pull`. Um die lokale Datenbank
+auf den Staging-Server zu spielen `bundle exec cap staging wordpress:db:push`.
+
 ## Todo
 * Wordpress Multisite Deployment
 * Sync von Upload-Ordnern
