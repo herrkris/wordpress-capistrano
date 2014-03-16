@@ -2,13 +2,17 @@
 # This file is distributed under the same license as the Twenty Thirteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-09-29 13:28:16+0000\n"
+"PO-Revision-Date: 2013-12-11 22:39:32+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/0.1\n"
 "Project-Id-Version: Twenty Thirteen\n"
+
+#: 404.php:16
+msgid "Not Found"
+msgstr "Nicht gefunden"
 
 msgid "The 2013 theme for WordPress takes us back to the blog, featuring a full range of post formats, each displayed beautifully in their own unique way. Design details abound, starting with a vibrant color scheme and matching header images, beautiful typography and icons, and a flexible layout that looks great on any device, big or small."
 msgstr "Das 2013 Theme für WordPress bringt uns zurück zum Blog. Es wird eine Bandbreite an Beitragsformaten unterstützt. Jedes Beitragsformat wird auf einzigartige Weise angezeigt. Viele kleine Details im Design runden das Aussehen der Webseite ab. Verschiedene Farbvariationen und passende Kopfgrafiken, schöne Schriften und Icons. Das flexible Layout passt sich optimal an die verschiedenen Endgeräte an. Egal ob kleiner Bildschirm auf dem Smartphone oder Tablet-PC. "
@@ -38,15 +42,11 @@ msgstr "Erscheint bei Beiträgen und Seiten in der Seitenleiste."
 
 #: image.php:39
 msgid "Full resolution"
-msgstr "volle Auflösung"
+msgstr "Volle Auflösung"
 
 #: inc/back-compat.php:41 inc/back-compat.php:53 inc/back-compat.php:68
 msgid "Twenty Thirteen requires at least WordPress version 3.6. You are running version %s. Please upgrade and try again."
 msgstr "Twenty Thirteen benötigt mindestens WordPress Version 3.6. Du benutzt Version %s. Bitte aktualisieren und erneut versuchen."
-
-#: 404.php:16
-msgid "Not found"
-msgstr "Nicht gefunden"
 
 #: 404.php:21
 msgid "This is somewhat embarrassing, isn&rsquo;t it?"
@@ -54,7 +54,7 @@ msgstr "Das ist etwas peinlich, nicht wahr?"
 
 #: 404.php:22
 msgid "It looks like nothing was found at this location. Maybe try a search?"
-msgstr "Es sieht so aus, als ob wir nicht das finden konnten, wonach du gesucht hast. Möglicherweise hilft die Suchfunktion."
+msgstr "Es sieht so aus, als ob wir nicht das finden konnten, wonach du gesucht hast. Möglicherweise hilft eine Suche."
 
 #: archive.php:29
 msgid "Daily Archives: %s"
@@ -139,7 +139,7 @@ msgstr "Seiten:"
 #: content-link.php:19 content-quote.php:25 content-status.php:19
 #: content-video.php:35 content.php:31 image.php:44 page.php:39
 msgid "Edit"
-msgstr "(Bearbeiten)"
+msgstr "Bearbeiten"
 
 #: functions.php:379
 msgid "Permalink to %s"
@@ -166,7 +166,7 @@ msgstr "Nichts gefunden"
 
 #: content-none.php:18
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr "Bereit, um deinen ersten Beitrag zu veröffentlichen? <a href=\"%1$s\">Los starte hier </a>."
+msgstr "Bereit, um deinen ersten Beitrag zu veröffentlichen? <a href=\"%1$s\">Starte hier</a>."
 
 #: content-none.php:22
 msgid "Sorry, but nothing matched your search terms. Please try again with different keywords."
@@ -174,7 +174,7 @@ msgstr "Entschuldige, aber es konnte nichts gefunden werden. Versuche es mit and
 
 #: content-none.php:27
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "Es sieht so aus, als ob wir nicht das finden konnten, wonach du gesucht hast. Möglicherweise hilft die Suchfunktion."
+msgstr "Es sieht so aus, als ob wir nicht das finden konnten, wonach du gesucht hast. Möglicherweise hilft eine Suche."
 
 #: footer.php:19
 msgid "http://wordpress.org/"
@@ -238,7 +238,7 @@ msgstr "Sticky"
 
 #: functions.php:338 functions.php:344
 msgid ", "
-msgstr ","
+msgstr ", "
 
 #: functions.php:353
 msgid "View all posts by %s"
@@ -259,7 +259,7 @@ msgstr "Zum Inhalt springen"
 
 #: image.php:22
 msgid "<span class=\"attachment-meta\">Published on <time class=\"entry-date\" datetime=\"%1$s\">%2$s</time> in <a href=\"%3$s\" title=\"Return to %4$s\" rel=\"gallery\">%5$s</a></span>"
-msgstr "<span class=\"attachment-meta\">Veröffentlicht am <time class=\"entry-date\" datetime=\"%1$s\">%2$s</time> bei <a href=\"%3$s\" title=\"Zurück zu %4$s\" rel=\"gallery\">%5$s</a>.</span>"
+msgstr "<span class=\"attachment-meta\">Veröffentlicht am <time class=\"entry-date\" datetime=\"%1$s\">%2$s</time> in <a href=\"%3$s\" title=\"Zurück zu %4$s\" rel=\"gallery\">%5$s</a>.</span>"
 
 #: image.php:51
 msgid "<span class=\"meta-nav\">&larr;</span> Previous"
