@@ -9,28 +9,48 @@
  */
 class WP_Migrate_DB_Command extends WP_CLI_Command {
 
-	/**
-	 * @synopsis output_folder output_host filename
-	 */
-	function to( $args = array() ) {
+    /**
+     * Run database migrations using the search and replace powers of wp-migrate-db.
+     *
+     * ## OPTIONS
+     *
+     * <outputfolder>
+     * : Destination folder on new host.
+     *
+     * <outputhost>
+     * : Destination url on new host.
+     *
+     * <filename>
+     * : Output filename for SQL dump
+     *   Use STDOUT as filename to write to STDOUT instead.
+     *
+     * ## EXAMPLES
+     *
+     *     wp migrate to /var/www/example.com http://example.com filename.sql
+     *     wp migrate to /var/www/example.com http://example.com STDOUT
+     *
+     * @synopsis <outputfolder> <outputhost> <filename>
+     */
+	function to( $args , $assoc_args ) {
 
 		$wpmdb = new CLI_Migrate( $args );
 
 		$wpmdb->migrate();
-		
+
 		WP_CLI::success( $wpmdb->get_filename() );
 	}
 
 
 	/**
-	 * Help function 
+	 * Help function
 	 */
 	public static function help() {
 		WP_CLI::line( <<<EOB
 usage: wp migrate to [output folder] [output host] [filename]
 
 For example, to migrate your db to example.com, where the files are stored in /var/www/example.com:
-wp migrate to /var/www/example.com http://example.com filename.sql
+wp migrate to /var/www/example.com http://usage: wp migrate to [output folder] [output host] [filename]
+example.com filename.sql
 
 To write to STDOUT pass that as the filename, eg:
 wp migrate run /var/www/example.com http://example.com STDOUT
@@ -51,7 +71,7 @@ class CLI_Migrate extends WP_Migrate_DB {
 	public $filename;
 
 	function __construct( $args ) {
-		
+
 		parent::__construct();
 
 		if ( ! isset( $args[0] ) || ! isset( $args[1] ) ) {
@@ -66,7 +86,7 @@ class CLI_Migrate extends WP_Migrate_DB {
 		$this->old_url = get_bloginfo( 'url' );
 
 		// WP-Migrate-DB relies on the $_POST global for its settings
-		// so we have to spoof it here. 	
+		// so we have to spoof it here.
 		$_POST = array(
 			'old_path' => $this->old_path,
 			'new_path' => $this->new_path,
@@ -81,9 +101,9 @@ class CLI_Migrate extends WP_Migrate_DB {
 
 	function migrate() {
 
-		if ( $this->filename == 'STDOUT' ) 
+		if ( $this->filename == 'STDOUT' )
 			$this->fp = fopen( 'php://stdout', 'w' );
-		else 
+		else
 			$this->fp = $this->open( $this->filename );
 
 		$this->db_backup_header();
@@ -96,7 +116,7 @@ class CLI_Migrate extends WP_Migrate_DB {
 	}
 
 	function db_backup() {
-	
+
 		global $table_prefix, $wpdb;
 
 		$tables = $wpdb->get_results("SHOW TABLES", ARRAY_N);
@@ -120,8 +140,8 @@ class CLI_Migrate extends WP_Migrate_DB {
 			return true;
 		}
 
-	} 
-	
+	}
+
 	function stow($query_line, $replace = true) {
 
         if ($this->gzip()) {
