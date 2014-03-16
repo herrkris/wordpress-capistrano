@@ -10,10 +10,12 @@ Easy deployment for Wordpress sites including your database.
 ## Setup
 For the capistrano deployment to run properly you have make some  preparations to your local environment:
 
-1. capistrano must be installed: `bundler install`
-2. Rename local-config.SAMPLE.php to local-config.php and replace the placeholders with your database credentials
-3. Rename config.SAMPLE.rb to config.rb (located in the config directory). For every stage you have to edit your database credentials. Pay attention to the :local_url variable!
-4. Rename the files in config/deploy accordingly and edit the variables so they match the environment
+1. Get the latest wordpress version with `git submodule init` and `git submodule update`
+2. capistrano must be installed: `bundler install`
+3. Rename local-config.SAMPLE.php to local-config.php and replace the placeholders with your database credentials
+4. Rename config.SAMPLE.rb to config.rb (located in the config directory). For every stage you have to edit your database credentials. Pay attention to the :local_url variable!
+5. Rename the files in config/deploy accordingly and edit the variables so they match the environment
+6. Activate the WP Migrate DB and WP Migrate DB CLI plugin
 
 ## Tasks
 ### `bundle exec cap staging deploy`
