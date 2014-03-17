@@ -49,7 +49,7 @@ namespace :wordpress do
   task create_release: :'wordpress:update_submodules' do
     on roles(:web) do
       submodule_path = "#{deploy_path}/submodules"
-      version = capture("cd #{submodule_path}/wordpress && git describe --abbrev=0 --tags")
+      version = capture("cd #{submodule_path}/wordpress && git describe --always --abbrev=0 --tags")
       within "#{submodule_path}/wordpress" do
         execute :git, :archive, version, '| tar -x -C', "#{release_path}/wordpress"
       end
