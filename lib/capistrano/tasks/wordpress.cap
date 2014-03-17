@@ -62,7 +62,7 @@ namespace :wordpress do
       on roles(:web) do
         within release_path do
           with path: "#{fetch(:path)}:$PATH" do
-            execute :wp, "migrate to #{fetch(:tmp_dir)} #{fetch(:local_url)} #{fetch(:tmp_dir)}/database.sql --path=wordpress"
+            execute :wp, "--url=#{fetch(:url)} migrate to #{fetch(:tmp_dir)} #{fetch(:local_url)} #{fetch(:tmp_dir)}/database.sql --path=wordpress"
             download! "#{fetch(:tmp_dir)}/database.sql", "database.sql"
             execute :rm, "#{fetch(:tmp_dir)}/database.sql"
           end
